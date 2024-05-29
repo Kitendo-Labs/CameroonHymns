@@ -1,0 +1,17 @@
+<svg id="Logo" xmlns="http://www.w3.org/2000/svg" width="154" height="49" viewBox="0 0 154 49">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 45px;
+        fill: #7d4196;
+        font-family: Poppins;
+        font-weight: 700;
+      }
+
+      .cls-2 {
+        fill: #ff3494;
+      }
+    </style>
+  </defs>
+  <text id="Bingle." class="cls-1" x="-1.698" y="35.938">Bin<tspan class="cls-2">gle.</tspan></text>
+</svg>
