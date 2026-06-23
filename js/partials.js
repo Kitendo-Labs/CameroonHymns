@@ -90,11 +90,15 @@
     return null;
   }
 
+  function redirectDisabled() {
+    return /[?&]noredirect\b/.test(window.location.search);
+  }
+
   function maybeRedirectToStore() {
     if (window.location.hash !== "#gettheapp") {
       return;
     }
-    if (/[?&]noredirect\b/.test(window.location.search)) {
+    if (redirectDisabled()) {
       return;
     }
     var url = storeUrlForDevice();
@@ -103,6 +107,29 @@
     }
   }
 
+  // A nav link to #gettheapp on a page that has that section is intercepted by
+  // the onePageNav plugin (preventDefault + smooth scroll), so the hash never
+  // changes and hashchange never fires. Catch the click in the capture phase,
+  // before onePageNav, and send phones to the store directly.
+  function handleStoreLinkClick(e) {
+    if (redirectDisabled()) {
+      return;
+    }
+    var anchor = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!anchor) {
+      return;
+    }
+    if (!/#gettheapp$/.test(anchor.getAttribute("href") || "")) {
+      return;
+    }
+    var url = storeUrlForDevice();
+    if (url) {
+      e.preventDefault();
+      window.location.replace(url);
+    }
+  }
+
   maybeRedirectToStore();
   window.addEventListener("hashchange", maybeRedirectToStore);
+  document.addEventListener("click", handleStoreLinkClick, true);
 })();
