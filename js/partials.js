@@ -26,6 +26,7 @@
     '<li><a href="index.html#screen">Screenshot</a></li>' +
     '<li><a href="privacy.html#privacy">Privacy</a></li>' +
     '<li><a href="terms.html#terms">Terms</a></li>' +
+    '<li><a href="index.html#gettheapp">Get the App</a></li>' +
     '</ul></nav>' +
     '</div></div></div></div></div></div>' +
     '</header>';
