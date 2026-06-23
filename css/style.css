@@ -3644,6 +3644,13 @@ div.single-cta:last-child {
   color: #F316F8;
 }
 
+.footer-social a svg {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  margin-top: -3px;
+}
+
 .f-widget-title h5 {
   color: #fff;
   font-size: 19px;

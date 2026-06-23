@@ -6,6 +6,18 @@
 (function () {
   "use strict";
 
+  // TikTok and Vero have no glyph in the bundled Font Awesome Pro 5.10.1, so
+  // their marks are inline SVGs. fill="currentColor" makes them inherit the
+  // footer-social icon color (and hover color) like the Font Awesome <i> icons.
+  var TIKTOK_SVG =
+    '<svg viewBox="0 0 448 512" width="1em" height="1em" fill="currentColor" aria-hidden="true">' +
+    '<path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z"/>' +
+    '</svg>';
+  var VERO_SVG =
+    '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true">' +
+    '<path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.4l-4.2 9.1a.8.8 0 0 1-1.46 0l-4.2-9.1a.7.7 0 0 1 .64-1h1.5a.8.8 0 0 1 .73.48L12 14.6l2.06-6.22a.8.8 0 0 1 .73-.48h1.5a.7.7 0 0 1 .64 1z"/>' +
+    '</svg>';
+
   var headerHTML =
     '<header class="header-area">' +
     '<div id="header-sticky" class="menu-area">' +
@@ -40,10 +52,10 @@
     '<div class="logo mt-15 mb-15"><a href="index.html#"><img src="img/logo/w_logo.png" alt="logo"></a></div>' +
     '<div class="footer-text mb-20"><p>Stay updated on the latest hymns, features, and news by following us on social media. Join us and can share your favorite hymns, discover new playlists, and engage in inspiring conversations about sacred music.</p></div>' +
     '<div class="footer-social">' +
-    '<a href="index.html#"><i class="fab fa-facebook-f"></i></a>' +
-    '<a href="index.html#"><i class="fab fa-twitter"></i></a>' +
-    '<a href="index.html#"><i class="fab fa-instagram"></i></a>' +
-    '<a href="index.html#"><i class="fab fa-google-plus-g"></i></a>' +
+    '<a href="https://www.tiktok.com/@cameroonhymns" target="_blank" rel="noopener" aria-label="TikTok">' + TIKTOK_SVG + '</a>' +
+    '<a href="https://www.instagram.com/cameroonhymns/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>' +
+    '<a href="https://www.facebook.com/share/1EkwySAJrW/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>' +
+    '<a href="https://vero.co/cameroonhymns" target="_blank" rel="noopener" aria-label="Vero">' + VERO_SVG + '</a>' +
     '</div></div></div>' +
     '<div class="col-xl-3 col-lg-3 col-sm-6">' +
     '<div class="footer-widget mb-10">' +
