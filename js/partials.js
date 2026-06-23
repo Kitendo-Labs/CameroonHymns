@@ -68,4 +68,40 @@
       footerMount.outerHTML = footerHTML;
     }
   });
+
+  // Send phones that reach the #gettheapp anchor straight to the matching store.
+  // iPadOS 13+ reports a Mac UA, so it is detected via the touch-point check.
+  // The ?noredirect query param disables this so the page can be tested on a phone.
+  var APP_STORE_URL = "https://apps.apple.com/us/app/cameroon-hymns/id6748924153";
+  var PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=net.kitendo.cameroon_hymn";
+
+  function storeUrlForDevice() {
+    var ua = navigator.userAgent || navigator.vendor || window.opera || "";
+    var isIOS =
+      /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    if (isIOS) {
+      return APP_STORE_URL;
+    }
+    if (/android/i.test(ua)) {
+      return PLAY_STORE_URL;
+    }
+    return null;
+  }
+
+  function maybeRedirectToStore() {
+    if (window.location.hash !== "#gettheapp") {
+      return;
+    }
+    if (/[?&]noredirect\b/.test(window.location.search)) {
+      return;
+    }
+    var url = storeUrlForDevice();
+    if (url) {
+      window.location.replace(url);
+    }
+  }
+
+  maybeRedirectToStore();
+  window.addEventListener("hashchange", maybeRedirectToStore);
 })();
