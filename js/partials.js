@@ -56,13 +56,13 @@
     '<a href="https://www.tiktok.com/@cameroonhymns" target="_blank" rel="noopener" aria-label="TikTok">' + TIKTOK_SVG + '</a>' +
     '<a href="https://www.instagram.com/cameroonhymns/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>' +
     '<a href="https://www.facebook.com/share/1EkwySAJrW/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>' +
-    '<a href="https://vero.co/cameroonhymns" target="_blank" rel="noopener" aria-label="Vero">' + VERO_SVG + '</a>' +
+    '<a href="https://vero.co/chymns" target="_blank" rel="noopener" aria-label="Vero">' + VERO_SVG + '</a>' +
     '</div></div></div>' +
     '<div class="col-xl-3 col-lg-3 col-sm-6">' +
     '<div class="footer-widget mb-10">' +
     '<div class="f-widget-title"><h5>Contact Us</h5></div>' +
     '<div class="footer-link"><div class="f-contact"><ul>' +
-    '<li><i class="icon dripicons-mail"></i><span><a href="mailto:kefeh@kitendo.net">kefeh@kitendo.net</a><br><a href="mailto:contact@kitendo.net">contact@kitendo.net</a></span></li>' +
+    '<li><i class="icon dripicons-mail"></i><span><a href="mailto:kefeh@kitendo.net">kefeh@kitendo.net</a><br><a href="mailto:chymns@kitendo.net">chymns@kitendo.net</a></span></li>' +
     '<li><i class="fal fa-map-marker-alt"></i><span>Buea Cameroon</span><span>South West Region</span></li>' +
     '</ul></div></div></div></div>' +
     '</div></div></div>' +
