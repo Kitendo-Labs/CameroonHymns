@@ -36,6 +36,12 @@
     '<li><a href="index.html#about">About Us</a></li>' +
     '<li><a href="index.html#features">Features</a></li>' +
     '<li><a href="index.html#screen">Screenshot</a></li>' +
+    '<li class="has-sub" id="nav-challenge"><a href="challenge.html">Challenge</a>' +
+    '<ul>' +
+    '<li><a href="challenge.html">Join Challenge</a></li>' +
+    '<li><a href="leaderboard.html">Leaderboard</a></li>' +
+    '<li><a href="challenge-rules.html">Challenge Rules</a></li>' +
+    '</ul></li>' +
     '<li><a href="privacy.html#privacy">Privacy</a></li>' +
     '<li><a href="terms.html#terms">Terms</a></li>' +
     '<li><a href="contact.html#contact">Contact</a></li>' +
@@ -59,6 +65,14 @@
     '<a href="https://vero.co/chymns" target="_blank" rel="noopener" aria-label="Vero">' + VERO_SVG + '</a>' +
     '</div></div></div>' +
     '<div class="col-xl-3 col-lg-3 col-sm-6">' +
+    '<div class="footer-widget mb-30">' +
+    '<div class="f-widget-title"><h5>Christmas Challenge</h5></div>' +
+    '<div class="footer-link"><ul>' +
+    '<li><a href="challenge.html">Join the Challenge</a></li>' +
+    '<li><a href="leaderboard.html">Live Leaderboard</a></li>' +
+    '<li><a href="challenge-rules.html">Official Rules</a></li>' +
+    '</ul></div></div></div>' +
+    '<div class="col-xl-3 col-lg-3 col-sm-6">' +
     '<div class="footer-widget mb-10">' +
     '<div class="f-widget-title"><h5>Contact Us</h5></div>' +
     '<div class="footer-link"><div class="f-contact"><ul>' +
@@ -71,9 +85,33 @@
     '</div></div></div></div>' +
     '</footer>';
 
+  var navStyle = document.createElement("style");
+  navStyle.textContent =
+    ".main-menu ul li.has-sub ul li a { color: #190a32; padding: 12px 18px; }" +
+    ".main-menu ul li.has-sub ul li a:hover { color: #F316F8; }" +
+    "@media (max-width: 991px) {" +
+    "  .main-menu .has-sub > ul { display: block; position: static; box-shadow: none; border-top: 0; padding-left: 16px; margin-top: 0; min-width: 0; }" +
+    "  .main-menu .has-sub > ul > li { float: none; border-bottom: 0; }" +
+    "  .main-menu ul li.has-sub ul li a { color: #707692; padding: 8px 20px; font-size: 13px; }" +
+    "}";
+  if (document.head) {
+    document.head.appendChild(navStyle);
+  }
+
   var headerMount = document.getElementById("site-header");
   if (headerMount) {
     headerMount.outerHTML = headerHTML;
+    var currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+    if (
+      currentPage === "challenge.html" ||
+      currentPage === "leaderboard.html" ||
+      currentPage === "challenge-rules.html"
+    ) {
+      var challengeNav = document.getElementById("nav-challenge");
+      if (challengeNav) {
+        challengeNav.classList.add("current");
+      }
+    }
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -125,20 +163,24 @@
   // changes and hashchange never fires. Catch the click in the capture phase,
   // before onePageNav, and send phones to the store directly.
   function handleStoreLinkClick(e) {
-    if (redirectDisabled()) {
-      return;
-    }
     var anchor = e.target && e.target.closest ? e.target.closest("a[href]") : null;
     if (!anchor) {
       return;
     }
-    if (!/#gettheapp$/.test(anchor.getAttribute("href") || "")) {
-      return;
+    if (!redirectDisabled() && /#gettheapp$/.test(anchor.getAttribute("href") || "")) {
+      var url = storeUrlForDevice();
+      if (url) {
+        e.preventDefault();
+        window.location.replace(url);
+        return;
+      }
     }
-    var url = storeUrlForDevice();
-    if (url) {
-      e.preventDefault();
-      window.location.replace(url);
+    if (anchor.closest(".main-menu")) {
+      var targetPage = (anchor.pathname.split("/").pop() || "index.html").toLowerCase();
+      var activePage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+      if (targetPage !== activePage || !anchor.hash) {
+        e.stopPropagation();
+      }
     }
   }
 
