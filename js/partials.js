@@ -81,7 +81,7 @@
     '</ul></div></div></div></div>' +
     '</div></div></div>' +
     '<div class="copyright-wrap text-center"><div class="container"><div class="row"><div class="col-12">' +
-    '<div class="copyright-text"><p>&copy; 2026 @Kitendo Group Inc</p></div>' +
+    '<div class="copyright-text"><p>&copy; 2026 Cameroon Hymns · Made by <a href="https://kitendo.net" target="_blank" rel="noopener noreferrer">Kitendo Group</a></p></div>' +
     '</div></div></div></div>' +
     '</footer>';
 

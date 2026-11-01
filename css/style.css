@@ -3744,6 +3744,17 @@ div.single-cta:last-child {
   color: #ddd;
 }
 
+.copyright-text a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.copyright-text a:hover {
+  color: #ddd;
+}
+
 .f-contact li {
   float: left;
   margin-bottom: 20px !important;
