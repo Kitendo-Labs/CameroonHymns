@@ -1,0 +1,230 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Défi de Noël · Classement - Cameroon Hymns</title>
+  <meta name="description" content="Classement en direct du Défi de Noël Cameroon Hymns : installations vérifiées par code d’invitation.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../img/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" href="../img/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="canonical" href="https://cameroonhymns.kitendo.net/fr/leaderboard.html">
+  <link rel="alternate" hreflang="en" href="https://cameroonhymns.kitendo.net/leaderboard.html">
+  <link rel="alternate" hreflang="fr" href="https://cameroonhymns.kitendo.net/fr/leaderboard.html">
+  <link rel="alternate" hreflang="x-default" href="https://cameroonhymns.kitendo.net/leaderboard.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cameroon Hymns">
+  <meta property="og:title" content="Défi de Noël · Classement - Cameroon Hymns">
+  <meta property="og:description" content="Classement en direct du Défi de Noël Cameroon Hymns : installations vérifiées par code d’invitation.">
+  <meta property="og:url" content="https://cameroonhymns.kitendo.net/fr/leaderboard.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:image" content="https://cameroonhymns.kitendo.net/img/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Public leaderboard of verified installs per invite code, read straight
+       from Firestore's REST API (the challenge collections are public-read). -->
+
+  <!-- CSS here -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/animate.min.css">
+  <link rel="stylesheet" href="../css/magnific-popup.css">
+  <link rel="stylesheet" href="../fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../css/dripicons.css">
+  <link rel="stylesheet" href="../css/slick.css">
+  <link rel="stylesheet" href="../css/default.css">
+  <link rel="stylesheet" href="../css/swiper.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/challenge.css">
+</head>
+
+<body>
+  <div id="site-header"></div>
+  <script src="../js/partials.js"></script>
+
+  <!-- main-area -->
+  <main>
+    <!-- hero-area -->
+    <section id="parallaxleaderboard" class="slider-area slider-bg2 second-slider-bg challenge-hero d-flex fix"
+      style="background-image: url(../img/bg/pink-header-bg.png); background-position:right 0; background-repeat: no-repeat; background-size: 65%;">
+      <div class="slider-shape ss-one layer" data-depth="0.10"><img src="../img/shape/header-sape.png" alt="shape"></div>
+      <div class="slider-shape ss-eight layer" data-depth="0.50"></div>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <div class="slider-content second-slider-content left-center">
+              <span class="challenge-badge">#CameroonHymnsChallenge · Classement en direct</span>
+              <h2>Défi de Noël <span>Classement</span></h2>
+              <p>Qui ramène le plus de monde aux cantiques ce Noël ? Installations vérifiées par code d’invitation.
+                Une installation compte dès que le nouvel utilisateur a ouvert l’appli sur 2 jours différents. Les
+                installations valent 30 des 100 points ; le jury et l’engagement font le reste.</p>
+              <nav class="challenge-subnav" aria-label="Navigation du Défi de Noël">
+                <a href="challenge.html"><i class="fas fa-gift"></i> Inviter et participer</a>
+                <a href="leaderboard.html" class="active"><i class="fas fa-trophy"></i> Classement</a>
+                <a href="challenge-rules.html"><i class="fas fa-scroll"></i> Règlement officiel</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- hero-area-end -->
+    <!-- leaderboard-area -->
+    <section id="leaderboard" class="services-area services-bg pt-30 pb-70"
+      style="background-image: url(../img/shape/header-sape2.png); background-position: right top; background-size: auto; background-repeat: no-repeat;">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-8 col-lg-10">
+            <div class="challenge-panel">
+              <p id="status">Chargement…</p>
+              <div class="table-wrap" hidden id="wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Participant</th>
+                      <th>Code</th>
+                      <th class="num">Installations</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rows"></tbody>
+                </table>
+              </div>
+              <div class="challenge-subnav centered mt-30">
+                <a href="challenge.html" class="active"><i class="fas fa-gift"></i> Rejoindre le défi</a>
+                <a href="challenge-rules.html"><i class="fas fa-scroll"></i> Lire le règlement officiel</a>
+                <a href="index.html#gettheapp"><i class="fas fa-download"></i> Télécharger l’appli</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- leaderboard-area-end -->
+  </main>
+  <!-- main-area-end -->
+
+  <div id="site-footer"></div>
+
+  <script>
+    (function () {
+      // ?emulator=127.0.0.1:8085 reads from a local Firestore emulator for testing.
+      const emulator = new URLSearchParams(location.search).get('emulator');
+      const HOST = emulator ? `http://${emulator}` : 'https://firestore.googleapis.com';
+      const BASE = `${HOST}/v1/projects/hymns-89b76/databases/(default)/documents`;
+
+      async function listCodes() {
+        const codes = [];
+        let pageToken = '';
+        do {
+          const res = await fetch(`${BASE}/challengeCodes?pageSize=300${pageToken ? '&pageToken=' + pageToken : ''}`);
+          if (!res.ok) throw new Error('codes ' + res.status);
+          const body = await res.json();
+          for (const doc of body.documents || []) {
+            const f = doc.fields;
+            codes.push({
+              code: f.code.stringValue,
+              name: f.displayName.stringValue,
+              handle: (f.tiktok && f.tiktok.stringValue) || (f.facebook && f.facebook.stringValue) || '',
+            });
+          }
+          pageToken = body.nextPageToken || '';
+        } while (pageToken);
+        return codes;
+      }
+
+      async function verifiedCount(code) {
+        const res = await fetch(`${BASE}:runAggregationQuery`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            structuredAggregationQuery: {
+              structuredQuery: {
+                from: [{ collectionId: 'challengeInstalls' }],
+                where: {
+                  compositeFilter: {
+                    op: 'AND',
+                    filters: [
+                      { fieldFilter: { field: { fieldPath: 'code' }, op: 'EQUAL', value: { stringValue: code } } },
+                      { fieldFilter: { field: { fieldPath: 'verified' }, op: 'EQUAL', value: { booleanValue: true } } },
+                    ]
+                  }
+                },
+              },
+              aggregations: [{ alias: 'n', count: {} }],
+            }
+          }),
+        });
+        if (!res.ok) throw new Error('count ' + res.status);
+        const body = await res.json();
+        return Number(body[0].result.aggregateFields.n.integerValue);
+      }
+
+      function cell(text, className) {
+        const td = document.createElement('td');
+        if (className) td.className = className;
+        td.textContent = text;
+        return td;
+      }
+
+      (async () => {
+        try {
+          const codes = await listCodes();
+          const counts = await Promise.all(codes.map((c) => verifiedCount(c.code)));
+          codes.forEach((c, i) => { c.installs = counts[i]; });
+          codes.sort((a, b) => b.installs - a.installs || a.name.localeCompare(b.name, 'fr'));
+          const rows = document.getElementById('rows');
+          codes.forEach((c, i) => {
+            const tr = document.createElement('tr');
+            tr.appendChild(cell(String(i + 1)));
+            const who = cell(c.name);
+            if (c.handle) {
+              const span = document.createElement('div');
+              span.className = 'handle';
+              span.textContent = c.handle;
+              who.appendChild(span);
+            }
+            tr.appendChild(who);
+            tr.appendChild(cell(c.code, 'code'));
+            tr.appendChild(cell(String(c.installs), 'num'));
+            rows.appendChild(tr);
+          });
+          document.getElementById('status').textContent =
+            codes.length ? `${codes.length} participant${codes.length > 1 ? 's' : ''} · mis à jour le ${new Date().toLocaleString('fr-FR')}` : 'Aucun participant pour le moment.';
+          document.getElementById('wrap').hidden = codes.length === 0;
+        } catch (e) {
+          document.getElementById('status').textContent = 'Impossible de charger le classement. Veuillez réessayer plus tard.';
+        }
+      })();
+    })();
+  </script>
+
+  <!-- JS here -->
+  <script src="../js/vendor/modernizr-3.5.0.min.js"></script>
+  <script src="../js/vendor/jquery-1.12.4.min.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/one-page-nav-min.js"></script>
+  <script src="../js/slick.min.js"></script>
+  <script src="../js/ajax-form.js"></script>
+  <script src="../js/paroller.js"></script>
+  <script src="../js/wow.min.js"></script>
+  <script src="../js/js_isotope.pkgd.min.js"></script>
+  <script src="../js/imagesloaded.min.js"></script>
+  <script src="../js/parallax.min.js"></script>
+  <script src="../js/jquery.waypoints.min.js"></script>
+  <script src="../js/jquery.counterup.min.js"></script>
+  <script src="../js/jquery.scrollUp.min.js"></script>
+  <script src="../js/typed.js"></script>
+  <script src="../js/parallax-scroll.js"></script>
+  <script src="../js/jquery.magnific-popup.min.js"></script>
+  <script src="../js/element-in-view.js"></script>
+  <script src="../js/swiper.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

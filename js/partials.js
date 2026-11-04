@@ -20,15 +20,17 @@
 
   // French pages live in /fr/ and declare <html lang="fr">. They share this
   // script, so labels come from STRINGS and asset paths get a "../" prefix.
-  // Only the pages in FR_PAGES are translated; the challenge pages stay
-  // English, so French links to them point back up to the root.
+  // Pages listed in FR_PAGES have a French copy under /fr/.
   var isFr = (document.documentElement.lang || "").toLowerCase().indexOf("fr") === 0;
   var root = isFr ? "../" : "";
-  var FR_PAGES = ["index.html", "privacy.html", "terms.html", "contact.html"];
+  var FR_PAGES = ["index.html", "privacy.html", "terms.html", "contact.html",
+    "challenge.html", "leaderboard.html", "challenge-rules.html"];
   var pageName = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
   var langSwitchHref = isFr
     ? "../" + (pageName === "index.html" ? "" : pageName)
     : "fr/" + (FR_PAGES.indexOf(pageName) > -1 && pageName !== "index.html" ? pageName : "");
+  // Keep ?invite=CODE when switching language on the challenge page.
+  if (pageName === "challenge.html") langSwitchHref += window.location.search;
 
   var STRINGS = {
     en: {
@@ -53,7 +55,6 @@
     }
   };
   var t = STRINGS[isFr ? "fr" : "en"];
-  var challengeBase = root;
 
   var headerHTML =
     '<header class="header-area">' +
@@ -73,11 +74,11 @@
     '<li><a href="index.html#about">' + t.about + '</a></li>' +
     '<li><a href="index.html#features">' + t.features + '</a></li>' +
     '<li><a href="index.html#screen">' + t.screenshot + '</a></li>' +
-    '<li class="has-sub" id="nav-challenge"><a href="' + challengeBase + 'challenge.html">' + t.challenge + '</a>' +
+    '<li class="has-sub" id="nav-challenge"><a href="challenge.html">' + t.challenge + '</a>' +
     '<ul>' +
-    '<li><a href="' + challengeBase + 'challenge.html">' + t.joinChallenge + '</a></li>' +
-    '<li><a href="' + challengeBase + 'leaderboard.html">' + t.leaderboard + '</a></li>' +
-    '<li><a href="' + challengeBase + 'challenge-rules.html">' + t.challengeRules + '</a></li>' +
+    '<li><a href="challenge.html">' + t.joinChallenge + '</a></li>' +
+    '<li><a href="leaderboard.html">' + t.leaderboard + '</a></li>' +
+    '<li><a href="challenge-rules.html">' + t.challengeRules + '</a></li>' +
     '</ul></li>' +
     '<li><a href="privacy.html#privacy">' + t.privacy + '</a></li>' +
     '<li><a href="terms.html#terms">' + t.terms + '</a></li>' +
@@ -106,9 +107,9 @@
     '<div class="footer-widget mb-30">' +
     '<div class="f-widget-title"><h5>' + t.christmasChallenge + '</h5></div>' +
     '<div class="footer-link"><ul>' +
-    '<li><a href="' + challengeBase + 'challenge.html">' + t.joinTheChallenge + '</a></li>' +
-    '<li><a href="' + challengeBase + 'leaderboard.html">' + t.liveLeaderboard + '</a></li>' +
-    '<li><a href="' + challengeBase + 'challenge-rules.html">' + t.officialRules + '</a></li>' +
+    '<li><a href="challenge.html">' + t.joinTheChallenge + '</a></li>' +
+    '<li><a href="leaderboard.html">' + t.liveLeaderboard + '</a></li>' +
+    '<li><a href="challenge-rules.html">' + t.officialRules + '</a></li>' +
     '</ul></div></div></div>' +
     '<div class="col-xl-3 col-lg-3 col-sm-6">' +
     '<div class="footer-widget mb-10">' +
