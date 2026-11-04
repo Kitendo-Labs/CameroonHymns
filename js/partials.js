@@ -1,5 +1,5 @@
 // Shared header and footer for all Cameroon Hymns pages, defined once here so
-// the three pages stay in sync. Header is injected synchronously (main.js binds
+// every page stays in sync. Header is injected synchronously (main.js binds
 // #header-sticky and .main-menu at parse time, so the markup must exist before
 // that bundle runs); the footer has no script dependencies and is injected on
 // DOMContentLoaded.
@@ -18,6 +18,43 @@
     '<path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.4l-4.2 9.1a.8.8 0 0 1-1.46 0l-4.2-9.1a.7.7 0 0 1 .64-1h1.5a.8.8 0 0 1 .73.48L12 14.6l2.06-6.22a.8.8 0 0 1 .73-.48h1.5a.7.7 0 0 1 .64 1z"/>' +
     '</svg>';
 
+  // French pages live in /fr/ and declare <html lang="fr">. They share this
+  // script, so labels come from STRINGS and asset paths get a "../" prefix.
+  // Only the pages in FR_PAGES are translated; the challenge pages stay
+  // English, so French links to them point back up to the root.
+  var isFr = (document.documentElement.lang || "").toLowerCase().indexOf("fr") === 0;
+  var root = isFr ? "../" : "";
+  var FR_PAGES = ["index.html", "privacy.html", "terms.html", "contact.html"];
+  var pageName = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
+  var langSwitchHref = isFr
+    ? "../" + (pageName === "index.html" ? "" : pageName)
+    : "fr/" + (FR_PAGES.indexOf(pageName) > -1 && pageName !== "index.html" ? pageName : "");
+
+  var STRINGS = {
+    en: {
+      home: "Home", about: "About Us", features: "Features", screenshot: "Screenshot",
+      challenge: "Challenge", joinChallenge: "Join Challenge", leaderboard: "Leaderboard",
+      challengeRules: "Challenge Rules", privacy: "Privacy", terms: "Terms", contact: "Contact",
+      getApp: "Get the App", langSwitch: "FR", langSwitchLabel: "Version française",
+      footerText: "Stay updated on the latest hymns, features, and news by following us on social media. Join us and can share your favorite hymns, discover new playlists, and engage in inspiring conversations about sacred music.",
+      christmasChallenge: "Christmas Challenge", joinTheChallenge: "Join the Challenge",
+      liveLeaderboard: "Live Leaderboard", officialRules: "Official Rules", contactUs: "Contact Us",
+      region: "South West Region", madeBy: "Made by"
+    },
+    fr: {
+      home: "Accueil", about: "À propos", features: "Fonctions", screenshot: "Captures",
+      challenge: "Défi", joinChallenge: "Rejoindre le défi", leaderboard: "Classement",
+      challengeRules: "Règlement du défi", privacy: "Confidentialité", terms: "Conditions", contact: "Contact",
+      getApp: "Télécharger", langSwitch: "EN", langSwitchLabel: "English version",
+      footerText: "Suivez-nous sur les réseaux sociaux pour découvrir les derniers cantiques, les nouveautés et les actualités. Rejoignez-nous pour partager vos cantiques préférés, découvrir de nouvelles playlists et échanger autour de la musique sacrée.",
+      christmasChallenge: "Défi de Noël", joinTheChallenge: "Rejoindre le défi",
+      liveLeaderboard: "Classement en direct", officialRules: "Règlement officiel", contactUs: "Nous contacter",
+      region: "Région du Sud-Ouest", madeBy: "Réalisé par"
+    }
+  };
+  var t = STRINGS[isFr ? "fr" : "en"];
+  var challengeBase = root;
+
   var headerHTML =
     '<header class="header-area">' +
     '<div id="header-sticky" class="menu-area">' +
@@ -26,38 +63,39 @@
     '<div class="row align-items-center">' +
     '<div class="col-xl-2 col-lg-2">' +
     '<div class="logo">' +
-    '<a href="index.html"><img src="img/logo/logo.svg" alt="logo"></a>' +
+    '<a href="index.html"><img src="' + root + 'img/logo/logo.svg" alt="logo"></a>' +
     '</div></div>' +
     '<div class="col-xl-10 col-lg-9">' +
     '<div class="responsive"><i class="icon dripicons-align-right"></i></div>' +
     '<div class="main-menu text-right text-xl-right">' +
     '<nav id="mobile-menu"><ul>' +
-    '<li class="has-sub"><a href="index.html#parallax">Home</a></li>' +
-    '<li><a href="index.html#about">About Us</a></li>' +
-    '<li><a href="index.html#features">Features</a></li>' +
-    '<li><a href="index.html#screen">Screenshot</a></li>' +
-    '<li class="has-sub" id="nav-challenge"><a href="challenge.html">Challenge</a>' +
+    '<li class="has-sub"><a href="index.html#parallax">' + t.home + '</a></li>' +
+    '<li><a href="index.html#about">' + t.about + '</a></li>' +
+    '<li><a href="index.html#features">' + t.features + '</a></li>' +
+    '<li><a href="index.html#screen">' + t.screenshot + '</a></li>' +
+    '<li class="has-sub" id="nav-challenge"><a href="' + challengeBase + 'challenge.html">' + t.challenge + '</a>' +
     '<ul>' +
-    '<li><a href="challenge.html">Join Challenge</a></li>' +
-    '<li><a href="leaderboard.html">Leaderboard</a></li>' +
-    '<li><a href="challenge-rules.html">Challenge Rules</a></li>' +
+    '<li><a href="' + challengeBase + 'challenge.html">' + t.joinChallenge + '</a></li>' +
+    '<li><a href="' + challengeBase + 'leaderboard.html">' + t.leaderboard + '</a></li>' +
+    '<li><a href="' + challengeBase + 'challenge-rules.html">' + t.challengeRules + '</a></li>' +
     '</ul></li>' +
-    '<li><a href="privacy.html#privacy">Privacy</a></li>' +
-    '<li><a href="terms.html#terms">Terms</a></li>' +
-    '<li><a href="contact.html#contact">Contact</a></li>' +
-    '<li><a href="index.html#gettheapp">Get the App</a></li>' +
+    '<li><a href="privacy.html#privacy">' + t.privacy + '</a></li>' +
+    '<li><a href="terms.html#terms">' + t.terms + '</a></li>' +
+    '<li><a href="contact.html#contact">' + t.contact + '</a></li>' +
+    '<li><a href="index.html#gettheapp">' + t.getApp + '</a></li>' +
+    '<li><a href="' + langSwitchHref + '" hreflang="' + (isFr ? "en" : "fr") + '" aria-label="' + t.langSwitchLabel + '">' + t.langSwitch + '</a></li>' +
     '</ul></nav>' +
     '</div></div></div></div></div></div>' +
     '</header>';
 
   var footerHTML =
-    '<footer class="footer-bg footer-p pt-40" style="background-image: url(img/bg/f-bg.png); background-position: center top; background-size: auto;background-repeat: no-repeat;">' +
+    '<footer class="footer-bg footer-p pt-40" style="background-image: url(' + root + 'img/bg/f-bg.png); background-position: center top; background-size: auto;background-repeat: no-repeat;">' +
     '<div class="footer-top"><div class="container">' +
     '<div class="row justify-content-between">' +
     '<div class="col-xl-4 col-lg-4 col-sm-6">' +
     '<div class="footer-widget mb-30">' +
-    '<div class="logo mt-15 mb-15"><a href="index.html#"><img src="img/logo/w_logo.png" alt="logo"></a></div>' +
-    '<div class="footer-text mb-20"><p>Stay updated on the latest hymns, features, and news by following us on social media. Join us and can share your favorite hymns, discover new playlists, and engage in inspiring conversations about sacred music.</p></div>' +
+    '<div class="logo mt-15 mb-15"><a href="index.html#"><img src="' + root + 'img/logo/w_logo.png" alt="logo"></a></div>' +
+    '<div class="footer-text mb-20"><p>' + t.footerText + '</p></div>' +
     '<div class="footer-social">' +
     '<a href="https://www.tiktok.com/@cameroonhymns" target="_blank" rel="noopener" aria-label="TikTok">' + TIKTOK_SVG + '</a>' +
     '<a href="https://www.instagram.com/cameroonhymns/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>' +
@@ -66,22 +104,22 @@
     '</div></div></div>' +
     '<div class="col-xl-3 col-lg-3 col-sm-6">' +
     '<div class="footer-widget mb-30">' +
-    '<div class="f-widget-title"><h5>Christmas Challenge</h5></div>' +
+    '<div class="f-widget-title"><h5>' + t.christmasChallenge + '</h5></div>' +
     '<div class="footer-link"><ul>' +
-    '<li><a href="challenge.html">Join the Challenge</a></li>' +
-    '<li><a href="leaderboard.html">Live Leaderboard</a></li>' +
-    '<li><a href="challenge-rules.html">Official Rules</a></li>' +
+    '<li><a href="' + challengeBase + 'challenge.html">' + t.joinTheChallenge + '</a></li>' +
+    '<li><a href="' + challengeBase + 'leaderboard.html">' + t.liveLeaderboard + '</a></li>' +
+    '<li><a href="' + challengeBase + 'challenge-rules.html">' + t.officialRules + '</a></li>' +
     '</ul></div></div></div>' +
     '<div class="col-xl-3 col-lg-3 col-sm-6">' +
     '<div class="footer-widget mb-10">' +
-    '<div class="f-widget-title"><h5>Contact Us</h5></div>' +
+    '<div class="f-widget-title"><h5>' + t.contactUs + '</h5></div>' +
     '<div class="footer-link"><div class="f-contact"><ul>' +
     '<li><i class="icon dripicons-mail"></i><span><a href="mailto:kefeh@kitendo.net">kefeh@kitendo.net</a><br><a href="mailto:chymns@kitendo.net">chymns@kitendo.net</a></span></li>' +
-    '<li><i class="fal fa-map-marker-alt"></i><span>Buea Cameroon</span><span>South West Region</span></li>' +
+    '<li><i class="fal fa-map-marker-alt"></i><span>Buea Cameroon</span><span>' + t.region + '</span></li>' +
     '</ul></div></div></div></div>' +
     '</div></div></div>' +
     '<div class="copyright-wrap text-center"><div class="container"><div class="row"><div class="col-12">' +
-    '<div class="copyright-text"><p>&copy; 2026 Cameroon Hymns · Made by <a href="https://kitendo.net" target="_blank" rel="noopener noreferrer">Kitendo Group</a></p></div>' +
+    '<div class="copyright-text"><p>&copy; 2026 Cameroon Hymns · ' + t.madeBy + ' <a href="https://kitendo.net" target="_blank" rel="noopener noreferrer">Kitendo Group</a></p></div>' +
     '</div></div></div></div>' +
     '</footer>';
 
@@ -101,11 +139,10 @@
   var headerMount = document.getElementById("site-header");
   if (headerMount) {
     headerMount.outerHTML = headerHTML;
-    var currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
     if (
-      currentPage === "challenge.html" ||
-      currentPage === "leaderboard.html" ||
-      currentPage === "challenge-rules.html"
+      pageName === "challenge.html" ||
+      pageName === "leaderboard.html" ||
+      pageName === "challenge-rules.html"
     ) {
       var challengeNav = document.getElementById("nav-challenge");
       if (challengeNav) {
