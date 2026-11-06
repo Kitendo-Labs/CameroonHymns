@@ -34,7 +34,7 @@
 
   var STRINGS = {
     en: {
-      home: "Home", about: "About Us", features: "Features", screenshot: "Screenshot",
+      home: "Home", about: "About Us", features: "Features", screenshot: "Gallery",
       challenge: "Challenge", joinChallenge: "Join Challenge", leaderboard: "Leaderboard",
       challengeRules: "Challenge Rules", privacy: "Privacy", terms: "Terms", contact: "Contact",
       getApp: "Get the App", langSwitch: "FR", langSwitchLabel: "Version française",
@@ -44,7 +44,7 @@
       region: "South West Region", madeBy: "Made by"
     },
     fr: {
-      home: "Accueil", about: "À propos", features: "Fonctions", screenshot: "Captures",
+      home: "Accueil", about: "À propos", features: "Fonctions", screenshot: "Galerie",
       challenge: "Défi", joinChallenge: "Rejoindre le défi", leaderboard: "Classement",
       challengeRules: "Règlement du défi", privacy: "Confidentialité", terms: "Conditions", contact: "Contact",
       getApp: "Télécharger", langSwitch: "EN", langSwitchLabel: "English version",
@@ -80,10 +80,10 @@
     '<li><a href="leaderboard.html">' + t.leaderboard + '</a></li>' +
     '<li><a href="challenge-rules.html">' + t.challengeRules + '</a></li>' +
     '</ul></li>' +
+    '<li><a href="index.html#gettheapp">' + t.getApp + '</a></li>' +
     '<li><a href="privacy.html#privacy">' + t.privacy + '</a></li>' +
     '<li><a href="terms.html#terms">' + t.terms + '</a></li>' +
     '<li><a href="contact.html#contact">' + t.contact + '</a></li>' +
-    '<li><a href="index.html#gettheapp">' + t.getApp + '</a></li>' +
     '<li><a href="' + langSwitchHref + '" hreflang="' + (isFr ? "en" : "fr") + '" aria-label="' + t.langSwitchLabel + '">' + t.langSwitch + '</a></li>' +
     '</ul></nav>' +
     '</div></div></div></div></div></div>' +
